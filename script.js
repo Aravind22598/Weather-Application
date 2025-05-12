@@ -32,7 +32,7 @@ btn.addEventListener("click", async function () {
 
 
 async function fetchData(location) {
-    const url = `http://api.weatherapi.com/v1/current.json?key=d6410a9911b748aeb00121449251105&q=${location}&aqi=no`;
+    const url = `https://api.weatherapi.com/v1/current.json?key=d6410a9911b748aeb00121449251105&q=${location}&aqi=no`;
 
     const response = await fetch(url);
     if (response.status == 400) {
