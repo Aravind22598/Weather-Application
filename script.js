@@ -35,9 +35,12 @@ async function fetchData(location) {
     const url = `https://api.weatherapi.com/v1/current.json?key=d6410a9911b748aeb00121449251105&q=${location}&aqi=no`;
 
     const response = await fetch(url);
-    if (response.status == 400) {
-        alert("Invalid Location!!! \n Please enter correct location!!!");
+    if (response.status == 404) {
+        alert("Page not found");
         return null;
+    }
+    else if(response.status==400){
+        alert("Bad Request!! \n Invalid Location!!! \n Please enter correct location!!!");
     }
     else if (response.status == 200) {
         const response_json = await response.json();
@@ -73,12 +76,24 @@ function updateDom(weather_data) {
 
 
     // now update the html dom
-    temp_elem.innerText = temp;
+    temp_elem.innerText = temp+" °C";
     loc_elem.innerText = location;
     time_elem.innerText = time;
     date_elem.innerText = date;
     icon_elem.src = icon_url;
     weather_state_elem.innerText = state;
+
+    // code for updating the day
+
+    let myDate = new Date();
+        let myDay = myDate.getDay();
+
+        // Array of days. 
+        let weekday = ['Sunday', 'Monday', 'Tuesday',
+            'Wednesday', 'Thursday', 'Friday', 'Saturday'
+        ];
+        day_elem.innerText=weekday[myDay];
+    
 }
 
 
